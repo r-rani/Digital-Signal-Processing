@@ -7,7 +7,7 @@ title('x[n] = u[n] - u[n-10]');
 xlabel('n');
 ylabel('x[n]');
 xlim([-1, 11]);
-ylim([0, ])
+ylim([0, 2 ]);
 %% 1bc
 a = conv(x, x); % a[n] = x[n]*x[n]
 b = conv(a, x); % b[n] = a[n]*x[n]

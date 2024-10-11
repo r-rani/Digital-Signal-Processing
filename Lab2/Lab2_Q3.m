@@ -42,7 +42,7 @@ down_sample = zeros(size_dsx,size_dsy);
 
 for n = 1:size_dsx
     
-    for j = 1:size_dsy
+    for j = 1:size_dsy-1
         
         down_sample(n,j) = img2(n*fs,j*fs);
         
@@ -58,7 +58,7 @@ zero_hold = zeros(size(img2));
 
 for n = 1:size_dsx %iterate through x
     
-    for j = 1:size_dsy %iterate through y
+    for j = 1:size_dsy-1 %iterate through y
         
         for k = 1:5 %5x5 matrix      
             
@@ -93,7 +93,7 @@ l = 1;
 
 for n = 1:size_dsx
     
-    for j = 1:size_dsy
+    for j = 1:size_dsy-1
         
         first_hold1(n*5,j) = down_sample(n,j);
         
@@ -104,7 +104,7 @@ end
 
 for n = 1:size_y %iterates through 776 already done in previous
     
-    for j = 1:size_dsx %iterates through 156
+    for j = 1:size_dsx-1 %iterates through 156
                 
         temp1 = first_hold1(j,n);
         temp2 = first_hold1(j*5,n);
@@ -124,7 +124,7 @@ end
 
 for n = 1:size_x
     
-    for j = 1:size_dsy
+    for j = 1:size_dsy-1
         
         first_hold1(n,j*5) = first_hold1(n,j);
         
@@ -135,7 +135,7 @@ end
 
 for n = 1:size_x %iterate thrrough x 
     
-    for j = 1:size_dsy %iterate through y
+    for j = 1:size_dsy-1 %iterate through y
                 
         temp1 = first_hold1(n,j);
         temp2 = first_hold1(n,j*5);
