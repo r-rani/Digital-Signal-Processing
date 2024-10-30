@@ -80,4 +80,17 @@ dtft_h2 = calculate_dtft(h2, freq);
 %% 2c.) magnitude vs frequencies
 plot(freq, abs(dtft_h1));
 
+%% 3a. )
+%Gaussian white noise would be random with a standard deviation of 1. Ask
+%the TA what the deviation should be, if this right
+guass = randn(1,1000);
+guass_h1 = conv(h1, randn);
+guass_h2 = conv(h2, randn);
 
+dtft_h1_guass = calculate_dtft(guass_h1, freq);
+dtft_h2_guass = calculate_dtft(guass_h2, freq);
+%% 3b.)
+tiledlayout(2,1);
+plot(freq, dtft_h1_guass);
+nexttile
+plot(freq, dtft_h2_guass);
