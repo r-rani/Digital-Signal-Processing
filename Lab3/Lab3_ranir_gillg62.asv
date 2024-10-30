@@ -93,8 +93,12 @@ dtft_h2_guass = calculate_dtft(guass_h2, freq);
 %% 3b.)
 figure;
 subplot(2, 1, 1);
-plot(freq2,abs(dtft_h1_guass));  % Magnitude of DTFT for h1 convolution
+plot(freq2, abs(freq2, dtft_h1_guass));  % Magnitude of DTFT for h1 convolution
+xlabel('Frequency (rad/sample)');
+ylabel('Magnitude');
+title('Magnitude of DTFT for White Noise Convolved with h1[n]');
 grid on;
+
 subplot(2, 1, 2);
-plot(freq2, abs(dtft_h2_guass));  % Magnitude of DTFT for h2 convolution
+plot(freq2, abs(dtft_h1_guass));  % Magnitude of DTFT for h2 convolution
 grid on;
