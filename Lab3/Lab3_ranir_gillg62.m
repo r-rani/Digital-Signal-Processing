@@ -60,20 +60,16 @@ plot(frequencies, gain_h2);
 %% 2a.) 
 %dtft formula is sum of x[n]*e^(-jw) from 0 to N-1. 
 function output_dtft = calculate_dtft(x,w)
-    %output array init
-    output_dtft =zeros(length(w));
-    temp1 = 0;
-    temp2 = 0;
-    temp3 = 0;
-    %cant do starting 0. so start from 0 and go to length 
-    %%for n  = 1:length(x)
+    output_dtft =zeros(1,length(w));
     for i = 1:length(w)
-         temp1 = x(1) * exp(-1j * w(i)*0);
-         temp2 = x(2) * exp(-1j * w(i)*1);
-         temp3 = x(3) * exp(-1j * w(i)*2);
-         output_dtft(i) = temp1+temp2+temp3;
-        %output_dtft(n) = output_dtft(n) + x(n) * exp(-1j * w(i));
+        temp1=0;
+        freq = w(i);
+        for n = 1:length(x)
+            temp1 = temp1 + x(n) * exp(-1j * freq*(n-1));
+        end 
+        output_dtft(i) = temp1;
     end
+
     %%end
 end
 
@@ -84,15 +80,17 @@ freq_length = length(freq);
 freq2 = [-3*pi, 0, 3*pi];
 %apply func
 dtft_h1 = calculate_dtft(h1, freq);
-dtft_h1 = dtft_h1(:,1);
-%dtft_h1 = tranpose(dtft_h1);
 dtft_h2 = calculate_dtft(h2, freq);
-dtft_h2 = dtft_h2(:,1);
-%dtft_h2 = tranpose(dtft_h2);
-
 %% 2c.) magnitude vs frequencies
 plot(freq, abs(dtft_h1));
-%plot(freq, abs(dtft_h2));
+plot(freq, abs(dtft_h2));
+
+subplot(2, 1, 1);
+plot(freq, abs(dtft_h1));
+grid on;
+subplot(2, 1, 2);
+plot(freq, abs(dtft_h2));
+grid on;
 
 %% 3a. )
 %Gaussian white noise would be random with a standard deviation of 1. Ask
@@ -102,9 +100,8 @@ guass_h1 = conv(h1, guass);
 guass_h2 = conv(h2, guass);
 
 dtft_h1_guass = calculate_dtft(guass_h1, freq);
-dtft_h1_guass = dtft_h1_guass(:,1);
 dtft_h2_guass = calculate_dtft(guass_h2, freq);
-dtft_h2_guass = dtft_h2_guass(:,1);
+
 %% 3b.)
 figure;
 subplot(2, 1, 1);
