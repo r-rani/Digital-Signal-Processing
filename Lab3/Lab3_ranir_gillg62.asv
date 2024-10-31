@@ -102,9 +102,7 @@ guass_h1 = conv(h1, guass);
 guass_h2 = conv(h2, guass);
 
 dtft_h1_guass = calculate_dtft(guass_h1, freq);
-dtft_h1_guass = dtft_h1_guass(:,1);
 dtft_h2_guass = calculate_dtft(guass_h2, freq);
-dtft_h2_guass = dtft_h2_guass(:,1);
 %% 3b.)
 figure;
 subplot(2, 1, 1);
