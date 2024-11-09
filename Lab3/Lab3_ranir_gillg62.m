@@ -16,8 +16,9 @@ xd = 5 * cos((3*pi/5)*n);
 xe = 5 * cos((4*pi/5)*n);
 xf = 5 * cos(pi*n);
 
-h1 = [1/4 1/2 1/4];
-h2 = [-1/4 1/2 -1/4];
+h1 = [1/4 1/2 1/4]; %low pass filter - coeff all pos and add to 1 
+%higher freq signals will have lower gains and vice versa 
+h2 = [-1/4 1/2 -1/4]; %high pass filter 
 
 signals = {xa xb xc xd xe xf};
 %% 1b.) RMS of xa to xf
@@ -43,6 +44,9 @@ end
 %array of the frequencies
 frequencies = [0 pi/5 2*pi/5 3*pi/5 4*pi/5 pi];
 plot(frequencies, gain_h1);
+title("Gains of H1");
+ylabel("Gains");
+xlabel("Frequency");
 %% 1d.) repeat for h2
 RMS_out_h2 = [0 0 0 0 0 0];
 %find RMS for each signal
@@ -56,7 +60,9 @@ end
 
 %plot
 plot(frequencies, gain_h2);
-
+title("Gains H2");
+ylabel("Gains");
+xlabel("Frequency")
 %% 2a.) 
 %dtft formula is sum of x[n]*e^(-jw) from 0 to N-1. 
 function output_dtft = calculate_dtft(x,w)
@@ -69,8 +75,6 @@ function output_dtft = calculate_dtft(x,w)
         end 
         output_dtft(i) = temp1;
     end
-
-    %%end
 end
 
 %% 2b.) 
@@ -87,9 +91,15 @@ plot(freq, abs(dtft_h2));
 
 subplot(2, 1, 1);
 plot(freq, abs(dtft_h1));
+title("DTFT of h1[n]");
+ylabel("DTFT h1[n]");
+xlabel("Frequency");
 grid on;
 subplot(2, 1, 2);
 plot(freq, abs(dtft_h2));
+title("DTFT of h2[n]");
+ylabel("DTFT h2[n]");
+xlabel("Frequency");
 grid on;
 
 %% 3a. )
@@ -106,7 +116,13 @@ dtft_h2_guass = calculate_dtft(guass_h2, freq);
 figure;
 subplot(2, 1, 1);
 plot(freq,abs(dtft_h1_guass));  % Magnitude of DTFT for h1 convolution
+title("Magnitude of DTFT for h1 convolution");
+ylabel("Magnitude");
+xlabel("Frequency");
 grid on;
 subplot(2, 1, 2);
 plot(freq, abs(dtft_h2_guass));  % Magnitude of DTFT for h2 convolution
+title("Magnitude of DTFT for h2 convolution");
+ylabel("Magnitude");
+xlabel("Frequency");
 grid on;
